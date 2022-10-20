@@ -10,6 +10,10 @@ import SwiftUI
 struct OnboardingView: View {
     // MARK: - PROPERTY
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
+    
+    @State private var buttonWidth: Double = UIScreen.main.bounds.width - 80
+    @State private var buttonOffset: CGFloat = 0
+    
     // MARK: - BODY
     var body: some View {
         ZStack {
@@ -36,14 +40,7 @@ struct OnboardingView: View {
                 } //: Header
                 // MARK: - CENTER
                 ZStack {
-                    ZStack {
-                        Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 40)
-                            .frame(width: 260, height: 260, alignment: .center)
-                        Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 80)
-                            .frame(width: 260, height: 260, alignment: .center)
-                    }//: ZStack
+                    CircleGroupView(ShapeColor: .white, ShapOpacity: 0.2)
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
@@ -79,18 +76,18 @@ struct OnboardingView: View {
                         }
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80, alignment: .center)
+                        .offset(x: 120)
                         .onTapGesture {
                         isOnboardingViewActive = false
                     }
                         Spacer()
                     } //: HStack
                 } //: Footer
-                .frame(height: 80, alignment: .center)
+                .frame(width: buttonWidth, height: 80, alignment: .center)
                 .padding()
             } //: VSTACK
         } //: ZSTACK
     }
-
 }
 
 struct OnboardingView_Previews: PreviewProvider {

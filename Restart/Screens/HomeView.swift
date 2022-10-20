@@ -16,10 +16,13 @@ struct HomeView: View {
             // MARK: - Header
             
             Spacer()
-            Image("character-2")
-                .resizable()
-                .scaledToFit()
+            ZStack {
+                CircleGroupView(ShapeColor: .gray, ShapOpacity: 0.1)
+                Image("character-2")
+                    .resizable()
+                    .scaledToFit()
                 .padding()
+            }
             
             // MARK: - Center
             
@@ -31,12 +34,20 @@ struct HomeView: View {
                 .padding()
             
             // MARK: - Footer
-            
+            Spacer()
             Button(action: {
                 isOnboardingViewActive = true
             }) {
+                Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
+                    .imageScale(.large)
                 Text("Restart")
+                    .font(.system(.title3, design: .rounded))
+                    .fontWeight(.bold)
             }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.capsule)
+            .controlSize(.large)
+            .padding(.bottom, 40)
         } //: VSTACK
     }
 }
